@@ -328,7 +328,10 @@ Before your tech fest on **October 24, 2025**:
 - ✅ PostgreSQL database connected successfully
 - ✅ UptimeRobot monitoring configured (keeps site awake)
 - ✅ Test registration and spinning from multiple devices
-- ✅ Verify event winner limits (5 per event, 30 total max)
+- ✅ **Verify event winner limits (5 per event, 30 total max)**
+  - Test: Have multiple people spin simultaneously when an event has 4 winners
+  - Expected: Only 1 more person can win that event, others get "Better Luck Next Time"
+  - Query to check: `SELECT name, current_winners, max_winners FROM events;`
 - ✅ Verify winning probability (about 25% - 5 out of 20 people win)
 - ✅ Check database is storing data correctly using PSQL or DBeaver
 - ✅ Test on mobile devices (most students use mobile)
