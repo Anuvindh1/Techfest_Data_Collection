@@ -13,8 +13,15 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
   const animationRef = useRef<number>();
 
   // Create wheel segments - 6 events + 6 "Better Luck Next Time"
-  // Use distinct lighter purple/blue colors for "Better Luck Next Time" segments
-  const betterLuckColors = ["#7C3AED", "#6366F1", "#8B5CF6", "#A78BFA", "#818CF8", "#C4B5FD"];
+  // Use vibrant, distinct colors for "Better Luck Next Time" segments
+  const betterLuckColors = [
+    "#FF6B9D", // Bright Pink
+    "#00D9FF", // Electric Cyan
+    "#FFD93D", // Bright Yellow
+    "#A855F7", // Vivid Purple
+    "#4ADE80", // Lime Green
+    "#FB923C"  // Vibrant Orange
+  ];
   let betterLuckIndex = 0;
   const segments = events.flatMap(event => {
     const color = betterLuckColors[betterLuckIndex % betterLuckColors.length];
