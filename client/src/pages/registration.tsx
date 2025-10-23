@@ -73,14 +73,13 @@ export default function Registration() {
           <div className="inline-block mb-6">
             <div className="flex items-center justify-center gap-4 mb-6">
               {/* Logo Container - Replace with your Tantra 2025 logo */}
+              {/* Logo Container */}
               <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl shadow-primary/50">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center">
-                  <span className="text-2xl md:text-3xl font-display font-bold text-primary-foreground">
-                    TANTRA
-                    <br />
-                    2025
-                  </span>
-                </div>
+                <img 
+                  src="/tantra-2025.png" 
+                  alt="Tantra 2025 Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             <div className="flex items-center justify-center gap-2">
