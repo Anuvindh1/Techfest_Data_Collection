@@ -13,13 +13,17 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
   const animationRef = useRef<number>();
 
   // Create wheel segments - 6 events + 6 "Better Luck Next Time"
-  const segments = events.flatMap(event => [
-    { text: event.name, color: event.color, isEvent: true },
-    { text: "Better Luck Next Time", color: "#4B5563", isEvent: false }
-  ]);
-
-  console.log("Events received:", events.length, events);
-  console.log("Segments created:", segments.length, segments);
+  // Use distinct lighter purple/blue colors for "Better Luck Next Time" segments
+  const betterLuckColors = ["#7C3AED", "#6366F1", "#8B5CF6", "#A78BFA", "#818CF8", "#C4B5FD"];
+  let betterLuckIndex = 0;
+  const segments = events.flatMap(event => {
+    const color = betterLuckColors[betterLuckIndex % betterLuckColors.length];
+    betterLuckIndex++;
+    return [
+      { text: event.name, color: event.color, isEvent: true },
+      { text: "Better Luck Next Time", color: color, isEvent: false }
+    ];
+  });
 
   const totalSegments = segments.length;
   const segmentAngle = 360 / totalSegments;
@@ -58,11 +62,9 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
     ctx.restore();
 
     // Draw segments
-    console.log("Drawing", segments.length, "segments, segment angle:", segmentAngle);
     segments.forEach((segment, i) => {
       const startAngle = (i * segmentAngle * Math.PI) / 180;
       const endAngle = ((i + 1) * segmentAngle * Math.PI) / 180;
-      console.log(`Segment ${i}: ${segment.text}, angle: ${i * segmentAngle}° to ${(i + 1) * segmentAngle}°`);
 
       // Draw segment with gradient
       ctx.save();
@@ -71,25 +73,18 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
       ctx.arc(0, 0, radius, startAngle, endAngle);
       ctx.closePath();
 
-      // Create gradient for event segments
-      if (segment.isEvent) {
-        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
-        gradient.addColorStop(0, segment.color);
-        gradient.addColorStop(0.6, segment.color);
-        gradient.addColorStop(1, adjustBrightness(segment.color, -30));
-        ctx.fillStyle = gradient;
-      } else {
-        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
-        gradient.addColorStop(0, "#374151");
-        gradient.addColorStop(1, "#1F2937");
-        ctx.fillStyle = gradient;
-      }
+      // Create gradient for all segments using their assigned colors
+      const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
+      gradient.addColorStop(0, segment.color);
+      gradient.addColorStop(0.6, segment.color);
+      gradient.addColorStop(1, adjustBrightness(segment.color, -30));
+      ctx.fillStyle = gradient;
       
       ctx.fill();
 
-      // Draw border
-      ctx.strokeStyle = segment.isEvent ? "#ffffff" : "#6B7280";
-      ctx.lineWidth = 2;
+      // Draw bright white border for all segments to make them visually distinct
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 4;
       ctx.stroke();
 
       // Add shine effect for event segments
