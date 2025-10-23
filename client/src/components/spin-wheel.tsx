@@ -35,8 +35,11 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
     const centerY = canvas.height / 2;
     const radius = Math.min(centerX, centerY) - 30;
 
-    // Clear canvas
+    // Clear canvas completely
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Reset all transformations
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     // Save context state
     ctx.save();
