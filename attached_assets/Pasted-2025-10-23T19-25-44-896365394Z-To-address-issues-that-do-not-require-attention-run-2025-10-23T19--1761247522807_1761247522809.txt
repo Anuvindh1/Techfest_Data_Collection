@@ -1,0 +1,101 @@
+2025-10-23T19:25:44.896365394Z To address issues that do not require attention, run:
+2025-10-23T19:25:44.896367594Z   npm audit fix
+2025-10-23T19:25:44.896369564Z 
+2025-10-23T19:25:44.896371654Z To address all issues (including breaking changes), run:
+2025-10-23T19:25:44.896376484Z   npm audit fix --force
+2025-10-23T19:25:44.896378704Z 
+2025-10-23T19:25:44.896381334Z Run `npm audit` for details.
+2025-10-23T19:25:45.073566207Z 
+2025-10-23T19:25:45.073614038Z > rest-express@1.0.0 db:push
+2025-10-23T19:25:45.073618338Z > drizzle-kit push
+2025-10-23T19:25:45.073620678Z 
+2025-10-23T19:25:45.222552548Z No config path provided, using default 'drizzle.config.ts'
+2025-10-23T19:25:45.222793114Z Reading config file '/opt/render/project/src/drizzle.config.ts'
+2025-10-23T19:25:45.779155745Z Using 'pg' driver for database querying
+2025-10-23T19:25:45.974386115Z [⣷] Pulling schema from database...
+2025-10-23T19:25:46.046672169Z [✓] Pulling schema from database...
+2025-10-23T19:25:46.069128331Z [✓] Changes applied
+2025-10-23T19:25:46.208153365Z 
+2025-10-23T19:25:46.208178685Z > rest-express@1.0.0 build
+2025-10-23T19:25:46.208182226Z > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-10-23T19:25:46.208187396Z 
+2025-10-23T19:25:46.415628072Z vite v5.4.20 building for production...
+2025-10-23T19:25:46.465579547Z transforming...
+2025-10-23T19:25:46.768702884Z Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
+2025-10-23T19:25:46.768729805Z   npx update-browserslist-db@latest
+2025-10-23T19:25:46.768734605Z   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-10-23T19:25:47.471611443Z 
+2025-10-23T19:25:47.471640314Z A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+2025-10-23T19:25:49.708270777Z ✓ 1813 modules transformed.
+2025-10-23T19:25:49.91170672Z rendering chunks...
+2025-10-23T19:25:49.919054251Z computing gzip size...
+2025-10-23T19:25:49.932884529Z ../dist/public/index.html                   1.01 kB │ gzip:   0.53 kB
+2025-10-23T19:25:49.93290829Z ../dist/public/assets/index-6T7z4D9u.css   79.36 kB │ gzip:  12.69 kB
+2025-10-23T19:25:49.933070854Z ../dist/public/assets/index-DS8n5HoD.js   442.00 kB │ gzip: 138.36 kB
+2025-10-23T19:25:49.93331969Z ✓ built in 3.50s
+2025-10-23T19:25:49.984694892Z 
+2025-10-23T19:25:49.984712793Z   dist/index.js  16.1kb
+2025-10-23T19:25:49.984714973Z 
+2025-10-23T19:25:49.984716893Z ⚡ Done in 4ms
+2025-10-23T19:25:51.280018827Z ==> Uploading build...
+2025-10-23T19:25:59.33011604Z ==> Uploaded in 5.4s. Compression took 2.7s
+2025-10-23T19:25:59.376559103Z ==> Build successful 🎉
+2025-10-23T19:26:03.917619492Z ==> Deploying...
+2025-10-23T19:26:27.098780068Z ==> Running 'npm run start'
+2025-10-23T19:26:28.212604638Z 
+2025-10-23T19:26:28.212633928Z > rest-express@1.0.0 start
+2025-10-23T19:26:28.212640539Z > NODE_ENV=production node dist/index.js
+2025-10-23T19:26:28.212643519Z 
+2025-10-23T19:26:35.999406778Z ❌ PostgreSQL connection failed: ErrorEvent {
+2025-10-23T19:26:35.999446159Z   [Symbol(kTarget)]: WebSocket {
+2025-10-23T19:26:35.999452389Z     _events: [Object: null prototype] {
+2025-10-23T19:26:35.999459319Z       error: [Function],
+2025-10-23T19:26:35.99946317Z       message: [Function],
+2025-10-23T19:26:35.99946689Z       close: [Function],
+2025-10-23T19:26:35.99947054Z       open: [Function]
+2025-10-23T19:26:35.99947422Z     },
+2025-10-23T19:26:35.99947785Z     _eventsCount: 4,
+2025-10-23T19:26:35.99948148Z     _maxListeners: undefined,
+2025-10-23T19:26:35.99948516Z     _binaryType: 'arraybuffer',
+2025-10-23T19:26:35.99948891Z     _closeCode: 1006,
+2025-10-23T19:26:35.99949269Z     _closeFrameReceived: false,
+2025-10-23T19:26:35.99949634Z     _closeFrameSent: false,
+2025-10-23T19:26:35.9994999Z     _closeMessage: <Buffer >,
+2025-10-23T19:26:35.99950347Z     _closeTimer: null,
+2025-10-23T19:26:35.99950688Z     _errorEmitted: true,
+2025-10-23T19:26:35.99951052Z     _extensions: {},
+2025-10-23T19:26:35.999514041Z     _paused: false,
+2025-10-23T19:26:35.999517871Z     _protocol: '',
+2025-10-23T19:26:35.999521441Z     _readyState: 3,
+2025-10-23T19:26:35.999525321Z     _receiver: null,
+2025-10-23T19:26:35.999528981Z     _sender: null,
+2025-10-23T19:26:35.999532571Z     _socket: null,
+2025-10-23T19:26:35.999536231Z     _bufferedAmount: 0,
+2025-10-23T19:26:35.999540031Z     _isServer: false,
+2025-10-23T19:26:35.999543661Z     _redirects: 0,
+2025-10-23T19:26:35.999547331Z     _autoPong: true,
+2025-10-23T19:26:35.999551092Z     _url: 'wss://dpg-d3t7iruuk2gs73a970bg-a/v2',
+2025-10-23T19:26:35.999557592Z     _req: null,
+2025-10-23T19:26:35.999561612Z     [Symbol(shapeMode)]: false,
+2025-10-23T19:26:35.999565292Z     [Symbol(kCapture)]: false
+2025-10-23T19:26:35.999569182Z   },
+2025-10-23T19:26:35.999572792Z   [Symbol(kType)]: 'error',
+2025-10-23T19:26:35.999577302Z   [Symbol(kError)]: Error: connect ECONNREFUSED 10.211.239.93:443
+2025-10-23T19:26:35.999580982Z       at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1636:16) {
+2025-10-23T19:26:35.999584622Z     errno: -111,
+2025-10-23T19:26:35.999588322Z     code: 'ECONNREFUSED',
+2025-10-23T19:26:35.999591962Z     syscall: 'connect',
+2025-10-23T19:26:35.999595522Z     address: '10.211.239.93',
+2025-10-23T19:26:35.999599113Z     port: 443
+2025-10-23T19:26:35.999602762Z   },
+2025-10-23T19:26:35.999607093Z   [Symbol(kMessage)]: 'connect ECONNREFUSED 10.211.239.93:443'
+2025-10-23T19:26:35.999610873Z }
+2025-10-23T19:26:35.999748566Z ⚠️  Falling back to in-memory storage.
+2025-10-23T19:26:36.110303861Z 7:26:36 PM [express] serving on port 10000
+2025-10-23T19:26:39.451065002Z ==> Your service is live 🎉
+2025-10-23T19:26:39.660120954Z ==> 
+2025-10-23T19:26:39.857315976Z ==> ///////////////////////////////////////////////////////////
+2025-10-23T19:26:40.064567138Z ==> 
+2025-10-23T19:26:40.754523138Z ==> Available at your primary URL https://vimal-jyothi-techfest.onrender.com
+2025-10-23T19:26:40.95187519Z ==> 
+2025-10-23T19:26:41.141438753Z ==> ///////////////////////////////////////////////////////////
