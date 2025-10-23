@@ -129,6 +129,13 @@ export class FirebaseStorage implements IStorage {
         currentWinners: 0,
         color: "#EC4899",
       },
+      {
+        id: "event-6",
+        name: "Robotics",
+        maxWinners: 5,
+        currentWinners: 0,
+        color: "#EF4444",
+      },
     ];
 
     const eventsObj: Record<string, Event> = {};

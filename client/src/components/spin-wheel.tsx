@@ -12,10 +12,10 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
   const [rotation, setRotation] = useState(0);
   const animationRef = useRef<number>();
 
-  // Create wheel segments - 5 events + 5 "Better Luck Next Time"
+  // Create wheel segments - 6 events + 6 "Better Luck Next Time"
   const segments = events.flatMap(event => [
     { text: event.name, color: event.color, isEvent: true },
-    { text: "Better Luck Next Time", color: "#6B7280", isEvent: false }
+    { text: "Better Luck Next Time", color: "#4B5563", isEvent: false }
   ]);
 
   const totalSegments = segments.length;
@@ -30,7 +30,7 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const radius = Math.min(centerX, centerY) - 20;
+    const radius = Math.min(centerX, centerY) - 30;
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -40,34 +40,64 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
     ctx.translate(centerX, centerY);
     ctx.rotate((rotation * Math.PI) / 180);
 
+    // Draw outer glow ring
+    ctx.save();
+    ctx.shadowColor = "#8B5CF6";
+    ctx.shadowBlur = 30;
+    ctx.strokeStyle = "#8B5CF6";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(0, 0, radius + 10, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.restore();
+
     // Draw segments
     segments.forEach((segment, i) => {
       const startAngle = (i * segmentAngle * Math.PI) / 180;
       const endAngle = ((i + 1) * segmentAngle * Math.PI) / 180;
 
-      // Draw segment
+      // Draw segment with gradient
+      ctx.save();
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.arc(0, 0, radius, startAngle, endAngle);
       ctx.closePath();
-      ctx.fillStyle = segment.color;
+
+      // Create gradient for event segments
+      if (segment.isEvent) {
+        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
+        gradient.addColorStop(0, segment.color);
+        gradient.addColorStop(0.6, segment.color);
+        gradient.addColorStop(1, adjustBrightness(segment.color, -30));
+        ctx.fillStyle = gradient;
+      } else {
+        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
+        gradient.addColorStop(0, "#374151");
+        gradient.addColorStop(1, "#1F2937");
+        ctx.fillStyle = gradient;
+      }
+      
       ctx.fill();
-      ctx.strokeStyle = "#ffffff";
-      ctx.lineWidth = 3;
+
+      // Draw border
+      ctx.strokeStyle = segment.isEvent ? "#ffffff" : "#6B7280";
+      ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Add inner glow for event segments
+      // Add shine effect for event segments
       if (segment.isEvent) {
         ctx.save();
-        ctx.globalAlpha = 0.3;
+        ctx.globalAlpha = 0.25;
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.arc(0, 0, radius * 0.7, startAngle, endAngle);
+        ctx.arc(0, 0, radius * 0.5, startAngle, endAngle);
         ctx.closePath();
         ctx.fillStyle = "#ffffff";
         ctx.fill();
         ctx.restore();
       }
+
+      ctx.restore();
 
       // Draw text
       ctx.save();
@@ -76,74 +106,98 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#ffffff";
-      ctx.font = segment.isEvent ? "bold 16px Orbitron" : "14px Inter";
-      ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-      ctx.shadowBlur = 4;
+      
+      // Better font styling
+      if (segment.isEvent) {
+        ctx.font = "bold 18px 'Inter', system-ui, sans-serif";
+        ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+        ctx.shadowBlur = 6;
+      } else {
+        ctx.font = "600 14px 'Inter', system-ui, sans-serif";
+        ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+        ctx.shadowBlur = 4;
+      }
       
       // Wrap text for long event names
-      const maxWidth = radius * 0.6;
+      const maxWidth = radius * 0.55;
       const words = segment.text.split(" ");
-      let line = "";
-      let y = radius * 0.65;
+      const lines: string[] = [];
+      let currentLine = "";
 
-      words.forEach((word, index) => {
-        const testLine = line + word + " ";
+      words.forEach((word) => {
+        const testLine = currentLine + (currentLine ? " " : "") + word;
         const metrics = ctx.measureText(testLine);
-        if (metrics.width > maxWidth && index > 0) {
-          ctx.fillText(line, 0, y);
-          line = word + " ";
-          y += 20;
+        if (metrics.width > maxWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
         } else {
-          line = testLine;
+          currentLine = testLine;
         }
       });
-      ctx.fillText(line, 0, y);
+      if (currentLine) lines.push(currentLine);
+
+      // Draw lines
+      const lineHeight = segment.isEvent ? 22 : 18;
+      const startY = radius * 0.65 - ((lines.length - 1) * lineHeight) / 2;
+      
+      lines.forEach((line, index) => {
+        ctx.fillText(line, 0, startY + index * lineHeight);
+      });
 
       ctx.restore();
     });
 
-    // Draw center circle
+    // Draw center circle with gradient
+    const centerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 50);
+    centerGradient.addColorStop(0, "#8B5CF6");
+    centerGradient.addColorStop(1, "#6D28D9");
+    
+    ctx.save();
+    ctx.shadowColor = "#8B5CF6";
+    ctx.shadowBlur = 20;
     ctx.beginPath();
-    ctx.arc(0, 0, 40, 0, 2 * Math.PI);
-    ctx.fillStyle = "#8B5CF6";
+    ctx.arc(0, 0, 50, 0, 2 * Math.PI);
+    ctx.fillStyle = centerGradient;
     ctx.fill();
     ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 3;
     ctx.stroke();
+    ctx.restore();
 
-    // Draw center text
+    // Draw center text with better styling
+    ctx.save();
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 14px Orbitron";
+    ctx.font = "bold 16px 'Inter', system-ui, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
+    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+    ctx.shadowBlur = 4;
     ctx.fillText("SPIN", 0, 0);
+    ctx.restore();
 
     ctx.restore();
 
-    // Draw pointer
+    // Draw modern pointer (triangle at top)
     ctx.save();
-    ctx.translate(centerX, 20);
+    ctx.translate(centerX, 40);
+    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+    ctx.shadowBlur = 10;
+    
+    // Outer pointer shadow
     ctx.beginPath();
     ctx.moveTo(0, 0);
-    ctx.lineTo(-15, -30);
-    ctx.lineTo(15, -30);
+    ctx.lineTo(-20, -35);
+    ctx.lineTo(20, -35);
     ctx.closePath();
-    ctx.fillStyle = "#EF4444";
+    
+    // Gradient for pointer
+    const pointerGradient = ctx.createLinearGradient(0, -35, 0, 0);
+    pointerGradient.addColorStop(0, "#FCD34D");
+    pointerGradient.addColorStop(1, "#F59E0B");
+    ctx.fillStyle = pointerGradient;
     ctx.fill();
     ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.restore();
-
-    // Draw outer ring glow
-    ctx.save();
-    ctx.translate(centerX, centerY);
-    ctx.beginPath();
-    ctx.arc(0, 0, radius + 5, 0, 2 * Math.PI);
-    ctx.strokeStyle = "#8B5CF6";
-    ctx.lineWidth = 3;
-    ctx.shadowColor = "#8B5CF6";
-    ctx.shadowBlur = 20;
     ctx.stroke();
     ctx.restore();
 
@@ -157,11 +211,11 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
 
       // Calculate target rotation
       const targetSegmentAngle = resultIndex * segmentAngle;
-      const randomOffset = Math.random() * segmentAngle * 0.8 - segmentAngle * 0.4;
-      const spins = 5 + Math.random() * 2; // 5-7 full rotations
+      const randomOffset = Math.random() * segmentAngle * 0.6 - segmentAngle * 0.3;
+      const spins = 6 + Math.random() * 3; // 6-9 full rotations
       const targetRotation = 360 * spins - targetSegmentAngle - randomOffset;
 
-      const duration = 5000; // 5 seconds
+      const duration = 6000; // 6 seconds for smoother spin
       const startTime = Date.now();
       const startRotation = rotation;
 
@@ -169,8 +223,8 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Easing function - ease out cubic
-        const eased = 1 - Math.pow(1 - progress, 3);
+        // Easing function - ease out cubic with slight bounce
+        const eased = 1 - Math.pow(1 - progress, 3.5);
         
         const currentRotation = startRotation + (targetRotation - startRotation) * eased;
         setRotation(currentRotation % 360);
@@ -191,23 +245,43 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
   }, [isSpinning, result, segments, segmentAngle, rotation]);
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="relative flex items-center justify-center p-4">
       <div className="relative">
-        {/* Outer glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-chart-2 to-primary blur-2xl opacity-30 animate-pulse-glow" />
+        {/* Outer neon glow effect */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-chart-2 to-primary blur-3xl opacity-40 animate-pulse" 
+             style={{ transform: "scale(1.1)" }} />
         
-        {/* Canvas */}
-        <canvas
-          ref={canvasRef}
-          width={600}
-          height={600}
-          className="relative max-w-full h-auto drop-shadow-2xl"
-          style={{
-            filter: isSpinning ? "blur(2px)" : "none",
-            transition: "filter 0.3s ease",
-          }}
-        />
+        {/* Canvas container with subtle rotation */}
+        <div className="relative">
+          <canvas
+            ref={canvasRef}
+            width={650}
+            height={650}
+            className="relative max-w-full h-auto"
+            style={{
+              filter: isSpinning ? "blur(1px) brightness(1.1)" : "none",
+              transition: "filter 0.3s ease",
+              transform: isSpinning ? "scale(1.02)" : "scale(1)",
+              transitionDuration: "0.3s"
+            }}
+          />
+        </div>
       </div>
     </div>
   );
+}
+
+// Helper function to adjust color brightness
+function adjustBrightness(hex: string, percent: number): string {
+  const num = parseInt(hex.replace("#", ""), 16);
+  const amt = Math.round(2.55 * percent);
+  const R = (num >> 16) + amt;
+  const G = (num >> 8 & 0x00FF) + amt;
+  const B = (num & 0x0000FF) + amt;
+  return "#" + (
+    0x1000000 +
+    (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+    (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+    (B < 255 ? (B < 1 ? 0 : B) : 255)
+  ).toString(16).slice(1).toUpperCase();
 }

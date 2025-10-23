@@ -73,35 +73,42 @@ export class MemoryStorage implements IStorage {
         name: "Coding Challenge",
         maxWinners: 5,
         currentWinners: 0,
-        color: "#8B5CF6", // Purple
+        color: "#8B5CF6", // Vibrant Purple
       },
       {
         id: "event-2",
         name: "Hackathon",
         maxWinners: 5,
         currentWinners: 0,
-        color: "#06B6D4", // Cyan
+        color: "#06B6D4", // Neon Cyan
       },
       {
         id: "event-3",
         name: "Tech Talk",
         maxWinners: 5,
         currentWinners: 0,
-        color: "#10B981", // Green
+        color: "#10B981", // Electric Green
       },
       {
         id: "event-4",
         name: "Workshop",
         maxWinners: 5,
         currentWinners: 0,
-        color: "#F59E0B", // Amber
+        color: "#F59E0B", // Golden Amber
       },
       {
         id: "event-5",
         name: "Gaming Arena",
         maxWinners: 5,
         currentWinners: 0,
-        color: "#EC4899", // Pink
+        color: "#EC4899", // Hot Pink
+      },
+      {
+        id: "event-6",
+        name: "Robotics",
+        maxWinners: 5,
+        currentWinners: 0,
+        color: "#EF4444", // Electric Red
       },
     ];
 
