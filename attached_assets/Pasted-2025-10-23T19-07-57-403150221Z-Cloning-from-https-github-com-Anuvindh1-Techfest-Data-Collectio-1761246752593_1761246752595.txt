@@ -1,0 +1,35 @@
+2025-10-23T19:07:57.403150221Z ==> Cloning from https://github.com/Anuvindh1/Techfest_Data_Collection
+2025-10-23T19:07:58.327654254Z ==> Checking out commit b32cbdd378ab8a8dff5959b37c29491f6cc2e502 in branch main
+2025-10-23T19:07:59.384723828Z ==> Using Node.js version 22.16.0 (default)
+2025-10-23T19:07:59.410280036Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-10-23T19:08:01.211425991Z ==> Running build command 'npm install; npm run build'...
+2025-10-23T19:08:08.863767826Z 
+2025-10-23T19:08:08.863802158Z added 389 packages, and audited 390 packages in 8s
+2025-10-23T19:08:08.863814479Z 
+2025-10-23T19:08:08.863819249Z 55 packages are looking for funding
+2025-10-23T19:08:08.863823459Z   run `npm fund` for details
+2025-10-23T19:08:08.871934131Z 
+2025-10-23T19:08:08.871953872Z 5 vulnerabilities (3 low, 2 moderate)
+2025-10-23T19:08:08.871958482Z 
+2025-10-23T19:08:08.871962522Z To address all issues, run:
+2025-10-23T19:08:08.871966122Z   npm audit fix
+2025-10-23T19:08:08.871969503Z 
+2025-10-23T19:08:08.871972993Z Run `npm audit` for details.
+2025-10-23T19:08:09.093240365Z 
+2025-10-23T19:08:09.093257186Z > rest-express@1.0.0 build
+2025-10-23T19:08:09.093262377Z > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-10-23T19:08:09.093267467Z 
+2025-10-23T19:08:09.250911306Z failed to load config from /opt/render/project/src/vite.config.ts
+2025-10-23T19:08:09.251257416Z error during build:
+2025-10-23T19:08:09.251264687Z Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@vitejs/plugin-react' imported from /opt/render/project/src/vite.config.ts.timestamp-1761246489248-e4b3243cee97.mjs
+2025-10-23T19:08:09.251269007Z     at Object.getPackageJSONURL (node:internal/modules/package_json_reader:256:9)
+2025-10-23T19:08:09.251273048Z     at packageResolve (node:internal/modules/esm/resolve:768:81)
+2025-10-23T19:08:09.251276528Z     at moduleResolve (node:internal/modules/esm/resolve:854:18)
+2025-10-23T19:08:09.251279988Z     at defaultResolve (node:internal/modules/esm/resolve:984:11)
+2025-10-23T19:08:09.251283768Z     at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+2025-10-23T19:08:09.251287388Z     at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+2025-10-23T19:08:09.251290898Z     at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+2025-10-23T19:08:09.251294389Z     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+2025-10-23T19:08:09.251297809Z     at ModuleJob._link (node:internal/modules/esm/module_job:137:49)
+2025-10-23T19:08:09.307066487Z ==> Build failed 😞
+2025-10-23T19:08:09.307083088Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
