@@ -109,27 +109,27 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
 
       ctx.restore();
 
-      // Draw text
+      // Draw text - simplified approach to ensure visibility in all segments
+      const midAngle = startAngle + (endAngle - startAngle) / 2;
+      
       ctx.save();
-      const textAngle = startAngle + (endAngle - startAngle) / 2;
-      ctx.rotate(textAngle + Math.PI / 2); // Add 90 degrees to make text readable from outside
+      ctx.fillStyle = "#ffffff";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillStyle = "#ffffff";
       
-      // Better font styling
+      // Font styling optimized for 12 segments
       if (segment.isEvent) {
-        ctx.font = "bold 16px 'Inter', system-ui, sans-serif";
-        ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
-        ctx.shadowBlur = 6;
-      } else {
-        ctx.font = "600 12px 'Inter', system-ui, sans-serif";
-        ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+        ctx.font = "bold 12px 'Inter', system-ui, sans-serif";
+        ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
         ctx.shadowBlur = 4;
+      } else {
+        ctx.font = "600 9px 'Inter', system-ui, sans-serif";
+        ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+        ctx.shadowBlur = 3;
       }
       
-      // Wrap text for long event names
-      const maxWidth = radius * 0.6;
+      // Wrap text conservatively for narrow segments
+      const maxWidth = radius * 0.30;
       const words = segment.text.split(" ");
       const lines: string[] = [];
       let currentLine = "";
@@ -146,14 +146,29 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
       });
       if (currentLine) lines.push(currentLine);
 
-      // Draw lines - position text along the radius
-      const lineHeight = segment.isEvent ? 20 : 16;
-      const textRadius = radius * 0.7; // Distance from center
-      const totalTextHeight = (lines.length - 1) * lineHeight;
+      // Limit to 2 lines to ensure text fits
+      const displayLines = lines.slice(0, 2);
+      const lineHeight = segment.isEvent ? 13 : 11;
+      const textRadius = radius * 0.68;
       
-      lines.forEach((line, index) => {
-        const yOffset = -totalTextHeight / 2 + index * lineHeight;
-        ctx.fillText(line, textRadius, yOffset);
+      // Draw each line along the radius
+      displayLines.forEach((line, lineIndex) => {
+        ctx.save();
+        
+        // Rotate to segment midpoint
+        ctx.rotate(midAngle);
+        
+        // Translate out to text position
+        ctx.translate(textRadius, 0);
+        
+        // Rotate text to be perpendicular to radius (readable from outside)
+        ctx.rotate(Math.PI / 2);
+        
+        // Offset for multiple lines
+        const yPos = (lineIndex - (displayLines.length - 1) / 2) * lineHeight;
+        ctx.fillText(line, 0, yPos);
+        
+        ctx.restore();
       });
 
       ctx.restore();
