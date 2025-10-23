@@ -70,35 +70,35 @@ export class MemoryStorage implements IStorage {
     const defaultEvents: Event[] = [
       {
         id: "event-1",
-        name: "Whats in the box",
+        name: "What's In The Box",
         maxWinners: 5,
         currentWinners: 0,
         color: "#8B5CF6", // Vibrant Purple
       },
       {
         id: "event-2",
-        name: "Guess the beat",
+        name: "Guess The Beat",
         maxWinners: 5,
         currentWinners: 0,
         color: "#06B6D4", // Neon Cyan
       },
       {
         id: "event-3",
-        name: "Byte the basket",
+        name: "Byte The Basket",
         maxWinners: 5,
         currentWinners: 0,
         color: "#10B981", // Electric Green
       },
       {
         id: "event-4",
-        name: "Memory game",
+        name: "Memory Game",
         maxWinners: 5,
         currentWinners: 0,
         color: "#F59E0B", // Golden Amber
       },
       {
         id: "event-5",
-        name: "Cross word puzzle",
+        name: "Cross Word Puzzle",
         maxWinners: 5,
         currentWinners: 0,
         color: "#EC4899", // Hot Pink
