@@ -1,13 +1,11 @@
-import { drizzle } from "drizzle-orm/neon-serverless";
-import { Pool, neonConfig } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/node-postgres";
+import pkg from "pg";
+const { Pool } = pkg;
 import { eq, sql } from "drizzle-orm";
 import { participants, events } from "@shared/schema";
 import { type Participant, type InsertParticipant, type Event } from "@shared/schema";
 import type { IStorage } from "./storage";
 import { randomUUID } from "crypto";
-import ws from "ws";
-
-neonConfig.webSocketConstructor = ws;
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const db = drizzle(pool);
