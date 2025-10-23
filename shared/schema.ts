@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { pgTable, varchar, integer, bigint } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 // Participant registration schema
 export const participantSchema = z.object({
@@ -38,3 +40,20 @@ export const spinResultSchema = z.object({
 });
 
 export type SpinResult = z.infer<typeof spinResultSchema>;
+
+// Drizzle ORM Table Definitions
+export const participants = pgTable("participants", {
+  id: varchar("id").primaryKey(),
+  name: varchar("name").notNull(),
+  phone: varchar("phone").notNull(),
+  spinResult: varchar("spin_result"),
+  timestamp: bigint("timestamp", { mode: "number" }).notNull(),
+});
+
+export const events = pgTable("events", {
+  id: varchar("id").primaryKey(),
+  name: varchar("name").notNull(),
+  maxWinners: integer("max_winners").notNull(),
+  currentWinners: integer("current_winners").notNull().default(0),
+  color: varchar("color").notNull(),
+});
