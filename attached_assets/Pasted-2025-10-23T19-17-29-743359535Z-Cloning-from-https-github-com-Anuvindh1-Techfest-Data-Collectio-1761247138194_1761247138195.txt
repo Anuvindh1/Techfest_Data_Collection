@@ -1,0 +1,104 @@
+2025-10-23T19:17:29.743359535Z ==> Cloning from https://github.com/Anuvindh1/Techfest_Data_Collection
+2025-10-23T19:17:30.689429606Z ==> Checking out commit b32cbdd378ab8a8dff5959b37c29491f6cc2e502 in branch main
+2025-10-23T19:18:04.362862017Z ==> Using Node.js version 22.16.0 (default)
+2025-10-23T19:18:04.404066268Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-10-23T19:18:08.536361619Z ==> Running build command 'npm install --include=dev && npm run build'...
+2025-10-23T19:18:19.580145298Z 
+2025-10-23T19:18:19.580169078Z added 483 packages, and audited 484 packages in 11s
+2025-10-23T19:18:19.580183738Z 
+2025-10-23T19:18:19.580200769Z 63 packages are looking for funding
+2025-10-23T19:18:19.580208209Z   run `npm fund` for details
+2025-10-23T19:18:19.603504707Z 
+2025-10-23T19:18:19.603523188Z 8 vulnerabilities (3 low, 5 moderate)
+2025-10-23T19:18:19.603527248Z 
+2025-10-23T19:18:19.603531508Z To address issues that do not require attention, run:
+2025-10-23T19:18:19.603535078Z   npm audit fix
+2025-10-23T19:18:19.603538548Z 
+2025-10-23T19:18:19.603542208Z To address all issues (including breaking changes), run:
+2025-10-23T19:18:19.603546618Z   npm audit fix --force
+2025-10-23T19:18:19.603549908Z 
+2025-10-23T19:18:19.603554078Z Run `npm audit` for details.
+2025-10-23T19:18:20.016787944Z 
+2025-10-23T19:18:20.016815885Z > rest-express@1.0.0 build
+2025-10-23T19:18:20.016821615Z > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-10-23T19:18:20.016829285Z 
+2025-10-23T19:18:20.224625189Z vite v5.4.20 building for production...
+2025-10-23T19:18:20.291956028Z transforming...
+2025-10-23T19:18:20.8125238Z Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
+2025-10-23T19:18:20.81254105Z   npx update-browserslist-db@latest
+2025-10-23T19:18:20.81254571Z   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-10-23T19:18:21.725209185Z 
+2025-10-23T19:18:21.725235226Z A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+2025-10-23T19:18:24.364618753Z ✓ 1813 modules transformed.
+2025-10-23T19:18:24.580737175Z rendering chunks...
+2025-10-23T19:18:24.588294116Z computing gzip size...
+2025-10-23T19:18:24.601027138Z ../dist/public/index.html                   1.01 kB │ gzip:   0.53 kB
+2025-10-23T19:18:24.601043559Z ../dist/public/assets/index-6T7z4D9u.css   79.36 kB │ gzip:  12.69 kB
+2025-10-23T19:18:24.601165381Z ../dist/public/assets/index-DS8n5HoD.js   442.00 kB │ gzip: 138.36 kB
+2025-10-23T19:18:24.601410866Z ✓ built in 4.35s
+2025-10-23T19:18:24.647129804Z 
+2025-10-23T19:18:24.647150115Z   dist/index.js  16.1kb
+2025-10-23T19:18:24.647153295Z 
+2025-10-23T19:18:24.647156355Z ⚡ Done in 5ms
+2025-10-23T19:19:00.604900422Z ==> Uploading build...
+2025-10-23T19:19:11.087371961Z ==> Uploaded in 5.2s. Compression took 5.2s
+2025-10-23T19:19:11.087416062Z ==> Build successful 🎉
+2025-10-23T19:19:14.621907343Z ==> Deploying...
+2025-10-23T19:19:32.942392194Z ==> Running 'npm run start'
+2025-10-23T19:19:34.131324935Z 
+2025-10-23T19:19:34.131350926Z > rest-express@1.0.0 start
+2025-10-23T19:19:34.131354846Z > NODE_ENV=production node dist/index.js
+2025-10-23T19:19:34.131356896Z 
+2025-10-23T19:19:40.93097985Z ❌ PostgreSQL connection failed: ErrorEvent {
+2025-10-23T19:19:40.931013771Z   [Symbol(kTarget)]: WebSocket {
+2025-10-23T19:19:40.931017961Z     _events: [Object: null prototype] {
+2025-10-23T19:19:40.931022291Z       error: [Function],
+2025-10-23T19:19:40.931025552Z       message: [Function],
+2025-10-23T19:19:40.931028612Z       close: [Function],
+2025-10-23T19:19:40.931032012Z       open: [Function]
+2025-10-23T19:19:40.931035272Z     },
+2025-10-23T19:19:40.931038822Z     _eventsCount: 4,
+2025-10-23T19:19:40.931042692Z     _maxListeners: undefined,
+2025-10-23T19:19:40.931045102Z     _binaryType: 'arraybuffer',
+2025-10-23T19:19:40.931047162Z     _closeCode: 1006,
+2025-10-23T19:19:40.931049272Z     _closeFrameReceived: false,
+2025-10-23T19:19:40.931051292Z     _closeFrameSent: false,
+2025-10-23T19:19:40.931053362Z     _closeMessage: <Buffer >,
+2025-10-23T19:19:40.931055422Z     _closeTimer: null,
+2025-10-23T19:19:40.931057452Z     _errorEmitted: true,
+2025-10-23T19:19:40.931059842Z     _extensions: {},
+2025-10-23T19:19:40.931061862Z     _paused: false,
+2025-10-23T19:19:40.931063862Z     _protocol: '',
+2025-10-23T19:19:40.931065882Z     _readyState: 3,
+2025-10-23T19:19:40.931067862Z     _receiver: null,
+2025-10-23T19:19:40.931069933Z     _sender: null,
+2025-10-23T19:19:40.931072013Z     _socket: null,
+2025-10-23T19:19:40.931074013Z     _bufferedAmount: 0,
+2025-10-23T19:19:40.931076043Z     _isServer: false,
+2025-10-23T19:19:40.931078213Z     _redirects: 0,
+2025-10-23T19:19:40.931080273Z     _autoPong: true,
+2025-10-23T19:19:40.931082413Z     _url: 'wss://dpg-d3t7iruuk2gs73a970bg-a/v2',
+2025-10-23T19:19:40.931084533Z     _req: null,
+2025-10-23T19:19:40.931086653Z     [Symbol(shapeMode)]: false,
+2025-10-23T19:19:40.931088723Z     [Symbol(kCapture)]: false
+2025-10-23T19:19:40.931090813Z   },
+2025-10-23T19:19:40.931092943Z   [Symbol(kType)]: 'error',
+2025-10-23T19:19:40.931096013Z   [Symbol(kError)]: Error: connect ECONNREFUSED 10.211.239.93:443
+2025-10-23T19:19:40.931098173Z       at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1636:16) {
+2025-10-23T19:19:40.931100213Z     errno: -111,
+2025-10-23T19:19:40.931102363Z     code: 'ECONNREFUSED',
+2025-10-23T19:19:40.931104513Z     syscall: 'connect',
+2025-10-23T19:19:40.931107303Z     address: '10.211.239.93',
+2025-10-23T19:19:40.931109383Z     port: 443
+2025-10-23T19:19:40.931111474Z   },
+2025-10-23T19:19:40.931114303Z   [Symbol(kMessage)]: 'connect ECONNREFUSED 10.211.239.93:443'
+2025-10-23T19:19:40.931116414Z }
+2025-10-23T19:19:40.931228916Z ⚠️  Falling back to in-memory storage.
+2025-10-23T19:19:41.031677274Z 7:19:40 PM [express] serving on port 10000
+2025-10-23T19:19:45.517268648Z ==> Your service is live 🎉
+2025-10-23T19:19:45.709594121Z ==> 
+2025-10-23T19:19:45.899819185Z ==> ///////////////////////////////////////////////////////////
+2025-10-23T19:19:46.097144387Z ==> 
+2025-10-23T19:19:46.28548976Z ==> Available at your primary URL https://vimal-jyothi-techfest.onrender.com
+2025-10-23T19:19:46.480470273Z ==> 
+2025-10-23T19:19:46.671703686Z ==> ///////////////////////////////////////////////////////////
