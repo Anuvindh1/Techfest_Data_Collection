@@ -140,6 +140,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // POST /api/admin/reset-winners - Reset all winner counts (FOR TESTING ONLY)
+  // Add password protection for safety
+  app.post("/api/admin/reset-winners", async (req, res) => {
+    try {
+      const { password } = req.body;
+      
+      // Simple password check (change "test123" to your own secret)
+      if (password !== "test123") {
+        res.status(401).json({ message: "Unauthorized" });
+        return;
+      }
+
+      // Reset all events to 0 winners
+      await storage.resetAllEventWinners();
+      
+      // Get updated events to confirm
+      const events = await storage.getEvents();
+      
+      res.json({ 
+        message: "✅ Winner counts reset successfully!",
+        tip: "You can now test the 5-winner limit again",
+        events: events.map(e => ({ name: e.name, currentWinners: e.currentWinners, maxWinners: e.maxWinners }))
+      });
+    } catch (error) {
+      console.error("Error resetting winners:", error);
+      res.status(500).json({ message: "Failed to reset winners" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

@@ -8,6 +8,7 @@ export interface IStorage {
   getEvents(): Promise<Event[]>;
   getEvent(id: string): Promise<Event | null>;
   incrementEventWinners(eventId: string): Promise<void>;
+  resetAllEventWinners(): Promise<void>;
   initializeEvents(): Promise<void>;
 }
 
@@ -60,6 +61,14 @@ export class MemoryStorage implements IStorage {
         throw new Error(`Event ${eventId} has reached maximum winners`);
       }
     }
+  }
+
+  async resetAllEventWinners(): Promise<void> {
+    // Reset all events to 0 winners
+    Array.from(this.events.entries()).forEach(([eventId, event]) => {
+      event.currentWinners = 0;
+      this.events.set(eventId, event);
+    });
   }
 
   async initializeEvents(): Promise<void> {

@@ -9,6 +9,7 @@ export interface IStorage {
   getEvents(): Promise<Event[]>;
   getEvent(id: string): Promise<Event | null>;
   incrementEventWinners(eventId: string): Promise<void>;
+  resetAllEventWinners(): Promise<void>;
   initializeEvents(): Promise<void>;
 }
 

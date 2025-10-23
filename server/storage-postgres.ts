@@ -75,6 +75,11 @@ export class PostgresStorage implements IStorage {
     }
   }
 
+  async resetAllEventWinners(): Promise<void> {
+    // Reset all events to 0 winners
+    await db.update(events).set({ currentWinners: 0 });
+  }
+
   async initializeEvents(): Promise<void> {
     const existingEvents = await db.select().from(events).limit(1);
     if (existingEvents.length > 0) {
