@@ -102,24 +102,24 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
       // Draw text
       ctx.save();
       const textAngle = startAngle + (endAngle - startAngle) / 2;
-      ctx.rotate(textAngle);
+      ctx.rotate(textAngle + Math.PI / 2); // Add 90 degrees to make text readable from outside
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#ffffff";
       
       // Better font styling
       if (segment.isEvent) {
-        ctx.font = "bold 18px 'Inter', system-ui, sans-serif";
+        ctx.font = "bold 16px 'Inter', system-ui, sans-serif";
         ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
         ctx.shadowBlur = 6;
       } else {
-        ctx.font = "600 14px 'Inter', system-ui, sans-serif";
+        ctx.font = "600 12px 'Inter', system-ui, sans-serif";
         ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
         ctx.shadowBlur = 4;
       }
       
       // Wrap text for long event names
-      const maxWidth = radius * 0.55;
+      const maxWidth = radius * 0.6;
       const words = segment.text.split(" ");
       const lines: string[] = [];
       let currentLine = "";
@@ -136,12 +136,14 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
       });
       if (currentLine) lines.push(currentLine);
 
-      // Draw lines
-      const lineHeight = segment.isEvent ? 22 : 18;
-      const startY = radius * 0.65 - ((lines.length - 1) * lineHeight) / 2;
+      // Draw lines - position text along the radius
+      const lineHeight = segment.isEvent ? 20 : 16;
+      const textRadius = radius * 0.7; // Distance from center
+      const totalTextHeight = (lines.length - 1) * lineHeight;
       
       lines.forEach((line, index) => {
-        ctx.fillText(line, 0, startY + index * lineHeight);
+        const yOffset = -totalTextHeight / 2 + index * lineHeight;
+        ctx.fillText(line, textRadius, yOffset);
       });
 
       ctx.restore();
