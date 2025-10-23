@@ -103,10 +103,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         result = "Better Luck Next Time";
       } else {
         // Random selection with weighted probability
-        // 50% chance for available events, 50% for "Better Luck Next Time"
+        // 25% chance for available events, 75% for "Better Luck Next Time"
+        // This means out of 20 people, approximately 5 will win (4-8 range)
         const random = Math.random();
         
-        if (random < 0.5 && availableEvents.length > 0) {
+        if (random < 0.25 && availableEvents.length > 0) {
           // Select a random available event
           const selectedEvent = availableEvents[Math.floor(Math.random() * availableEvents.length)];
           
