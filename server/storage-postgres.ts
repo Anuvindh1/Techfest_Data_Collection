@@ -105,7 +105,7 @@ export class PostgresStorage implements IStorage {
       },
       {
         id: "event-4",
-        name: "Tech Quiz",
+        name: "Memory game",
         maxWinners: 5,
         currentWinners: 0,
         color: "#F59E0B",

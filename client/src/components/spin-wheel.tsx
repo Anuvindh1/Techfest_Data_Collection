@@ -18,6 +18,9 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
     { text: "Better Luck Next Time", color: "#4B5563", isEvent: false }
   ]);
 
+  console.log("Events received:", events.length, events);
+  console.log("Segments created:", segments.length, segments);
+
   const totalSegments = segments.length;
   const segmentAngle = 360 / totalSegments;
 
