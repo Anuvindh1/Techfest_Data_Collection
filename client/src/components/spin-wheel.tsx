@@ -55,9 +55,11 @@ export function SpinWheel({ events, isSpinning, result }: SpinWheelProps) {
     ctx.restore();
 
     // Draw segments
+    console.log("Drawing", segments.length, "segments, segment angle:", segmentAngle);
     segments.forEach((segment, i) => {
       const startAngle = (i * segmentAngle * Math.PI) / 180;
       const endAngle = ((i + 1) * segmentAngle * Math.PI) / 180;
+      console.log(`Segment ${i}: ${segment.text}, angle: ${i * segmentAngle}° to ${(i + 1) * segmentAngle}°`);
 
       // Draw segment with gradient
       ctx.save();
