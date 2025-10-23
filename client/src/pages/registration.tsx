@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertParticipantSchema, type InsertParticipant } from "@shared/schema";
+import { insertParticipantSchema, type InsertParticipant, type Participant } from "@shared/schema";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useLocation } from "wouter";
@@ -31,7 +31,7 @@ export default function Registration() {
 
   const registerMutation = useMutation({
     mutationFn: async (data: InsertParticipant) => {
-      return await apiRequest("POST", "/api/register", data);
+      return await apiRequest<Participant>("POST", "/api/register", data);
     },
     onSuccess: (response) => {
       toast({
@@ -70,8 +70,20 @@ export default function Registration() {
       <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col items-center justify-center min-h-screen">
         {/* Hero Section */}
         <div className="text-center mb-12 space-y-6">
-          <div className="inline-block">
-            <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="inline-block mb-6">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              {/* Logo Container - Replace with your Tantra 2025 logo */}
+              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl shadow-primary/50">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center">
+                  <span className="text-2xl md:text-3xl font-display font-bold text-primary-foreground">
+                    TANTRA
+                    <br />
+                    2025
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-2">
               <Trophy className="w-8 h-8 md:w-12 md:h-12 text-primary animate-pulse" />
               <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-chart-2 animate-pulse" style={{ animationDelay: "0.5s" }} />
             </div>

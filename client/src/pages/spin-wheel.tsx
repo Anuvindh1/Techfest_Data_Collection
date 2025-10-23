@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import { type Event } from "@shared/schema";
+import { type Event, type Participant, type SpinResult } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Trophy, RefreshCw } from "lucide-react";
 import { SpinWheel } from "@/components/spin-wheel";
@@ -31,14 +31,14 @@ export default function SpinWheelPage() {
     queryKey: ["/api/events"],
   });
 
-  const { data: participant, isLoading: participantLoading } = useQuery({
+  const { data: participant, isLoading: participantLoading } = useQuery<Participant>({
     queryKey: ["/api/participant", participantId],
     enabled: !!participantId,
   });
 
   const spinMutation = useMutation({
     mutationFn: async () => {
-      return await apiRequest("POST", `/api/spin/${participantId}`, {});
+      return await apiRequest<SpinResult>("POST", `/api/spin/${participantId}`, {});
     },
     onSuccess: (response) => {
       setSpinResult({
